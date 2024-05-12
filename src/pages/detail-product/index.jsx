@@ -20,7 +20,7 @@ export default function ProductDetail() {
   return (
     <section className="px-4">
       <div className="container mx-auto pt-[141px] pb-12">
-        <div className="pb-[84px] flex gap-[10px] items-center">
+        <div className="pb-[84px] flex gap-[10px] items-center justify-center md:justify-start">
           <Link to={PAGE_URL.PRODUCT}>          
             <h2 className="text-5xl font-medium text-[#8A8B8D] hidden md:block cursor-pointer hover:text-black">Product</h2>
           </Link>

@@ -64,41 +64,29 @@ export default function Login() {
 
   return (
     <section className="flex justify-center items-center h-screen">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="p-8 w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">Login</h2>
         <form onSubmit={handleLogin}>
-          {" "}
-          {/* Added onSubmit handler */}
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-semibold mb-2"
-            >
-              Email Address
-            </label>
             <input
               type="email"
               id="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border rounded-md"
+              className="input"
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-semibold mb-2"
-            >
-              Password
-            </label>
             <input
               type="password"
               id="password"
               name="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border rounded-md"
+              className="input"
             />
           </div>
           <Button
@@ -107,10 +95,7 @@ export default function Login() {
             type="submit"
             disabled={loading}
           >
-            {" "}
-            {/* Added type="submit" and disabled attribute */}
             {loading ? "Logging in..." : "Login"}
-            {/* Display "Logging in..." text while loading */}
           </Button>
         </form>
         <div className="mt-4">

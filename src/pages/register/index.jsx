@@ -78,8 +78,8 @@ export default function Register() {
   };
 
   return (
-    <section className="flex justify-center items-center h-screen bg-gray-200">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <section className="flex justify-center items-center h-screen bg-white">
+      <div className="p-8 w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">Register</h2>
         <form onSubmit={handleRegister}>
           <div className="mb-4">

@@ -54,9 +54,9 @@ export default function ProductFilter() {
                 />
                 <label
                   htmlFor={option.id}
-                  className="flex items-center cursor-pointer text-xl"
+                  className="flex items-center cursor-pointer text-base md:text-xl"
                 >
-                  <span className="w-5 h-5 inline-block mr-2 text-[12px] rounded-full border border-grey flex-no-shrink"></span>
+                  <span className="w-5 h-5 inline-block mr-2 text-sm md:text-base rounded-full border border-grey flex-no-shrink"></span>
                   {option.label}
                 </label>
               </div>

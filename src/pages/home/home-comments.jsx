@@ -50,7 +50,7 @@ export default function HomeComments() {
         <div className="flex justify-center gap-8">
           <div className="flex place-content-end items-center">
             <FaArrowLeft
-              size={30}
+              size={24}
               onClick={prevProducts}
               className={`cursor-pointer hover:scale-110 ${
                 isLeftArrowActive ? "" : "opacity-50 pointer-events-none"
@@ -64,7 +64,7 @@ export default function HomeComments() {
           </div>
           <div className="flex place-content-start items-center">
             <FaArrowRight
-              size={30}
+              size={24}
               onClick={nextProducts}
               className={`cursor-pointer hover:scale-110 ${
                 isRightArrowActive ? "" : "opacity-50 pointer-events-none"

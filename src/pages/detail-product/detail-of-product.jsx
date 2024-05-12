@@ -50,9 +50,9 @@ export default function DetailOfProduct({ product }) {
           </div>
           <p className="text-xl md:text-2xl font-semibold">4.5</p>
           <hr className="border-0 bg-[#6A6A6A] h-5 w-0.5 my-1" />
-          <p className="text-base md:text-2xl ">2000 Reviews</p>
+          <p className="text-sm md:text-2xl ">2000 Reviews</p>
           <hr className="border-0 bg-[#6A6A6A] h-5 w-0.5 my-1" />
-          <p className="text-base md:text-2xl ">3000 Sold</p>
+          <p className="text-sm md:text-2xl ">3000 Sold</p>
         </div>
       </div>
       <hr />
