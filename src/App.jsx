@@ -12,7 +12,6 @@ import Footer from "./components/footer";
 import About from "./pages/about";
 import Store from "./pages/store";
 import ContactUs from "./pages/contact-us";
-import CreateProduct from "./pages/create-product";
 import NotFound from "./pages/not-found";
 import Dashboard from "./pages/dasboard";
 import ProductDetail from "./pages/detail-product";
@@ -39,7 +38,6 @@ export default function App() {
                 <Route path={PAGE_URL.PRODUCT} element={<Products />} />
                 <Route path={`${PAGE_URL.PRODUCT}/:productId`} element={<ProductDetail />} />
                 <Route path={PAGE_URL.DASHBOARD} element={<Dashboard />} />
-                <Route path={PAGE_URL.CREATEPRODUCT} element={<CreateProduct />} /> 
                 <Route path={`${PAGE_URL.PRODUCT}/:productId`} element={<ProductDetail />} />
                 <Route path={PAGE_URL.CHATBOT} element={<ChatBot />} />
               </>
