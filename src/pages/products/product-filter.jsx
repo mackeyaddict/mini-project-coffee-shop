@@ -6,7 +6,7 @@ const options = [
   { category: "Drink", items: [
     { id: "Coffee", label: "Coffee" },
     { id: "Tea", label: "Tea" },
-    { id: "Juice", label: "Juice" },
+    { id: "Fruit", label: "Fruit" },
   ] },
   { category: "Food", items: [
     { id: "Noodles", label: "Noodles" },
