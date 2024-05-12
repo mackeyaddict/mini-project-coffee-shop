@@ -99,6 +99,7 @@ export default function ProductList() {
           onClose={() => setOpenUpdateProductModal(false)}
         >
           <UpdateProduct
+            productId={selectedProduct.id}
             selectedProduct={selectedProduct}
             onClose={() => setOpenDeleteProductModal(false)}
           />
