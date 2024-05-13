@@ -21,14 +21,14 @@ export default function Footer() {
   return (
     <footer className="bg-[#2B2B2B]">
       <div className="container mx-auto px-4 flex justify-between items-center pt-12 pb-[10px]">
-        <div className="flex flex-col justify-center items-center text-sm md:text-base">
+        <div className="flex flex-col justify-center items-center text-xs md:text-base">
           <img src={companyLogo} alt="" className="w-[96px] md:w-[124px]" />
           <p className="text-white">homie@coffee.co.id</p>
           <p className="text-white">(+62) 895-4055-38475</p>
         </div>
         <div className="flex gap-[26px]">
           {footerLinks.map((section, index) => (
-            <ul key={index} className="text-white text-xs md:text-base">
+            <ul key={index} className="text-white text-[8px] md:text-base">
               <li className="font-semibold pb-[14px]">{section.title}</li>
               {section.links.map((link, idx) => (
                 <li key={idx} className="font-light pb-2 cursor-pointer">
