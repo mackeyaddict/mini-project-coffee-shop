@@ -38,7 +38,6 @@ export default function App() {
                 <Route path={PAGE_URL.PRODUCT} element={<Products />} />
                 <Route path={`${PAGE_URL.PRODUCT}/:productId`} element={<ProductDetail />} />
                 <Route path={PAGE_URL.DASHBOARD} element={<Dashboard />} />
-                <Route path={`${PAGE_URL.PRODUCT}/:productId`} element={<ProductDetail />} />
                 <Route path={PAGE_URL.CHATBOT} element={<ChatBot />} />
               </>
             )}
