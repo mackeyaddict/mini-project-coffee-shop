@@ -9,7 +9,7 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     allOrder(state, action) {
-      state.orders = action.payload
+      state.orders = action.payload;
     },
     clearOrders(state) {
       state.orders = [];
@@ -21,9 +21,12 @@ const orderSlice = createSlice({
         orderToUpdate.status = status;
       }
     },
+    cancelOrder(state, action) {
+      state.orders = state.orders.filter((order) => order.id !== action.payload);
+    },
   },
 });
 
-export const { allOrder, clearOrders, updateOrderStatus } = orderSlice.actions;
+export const { allOrder, clearOrders, updateOrderStatus, cancelOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;
