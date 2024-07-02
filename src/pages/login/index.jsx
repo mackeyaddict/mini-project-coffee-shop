@@ -100,7 +100,7 @@ export default function Login() {
         </form>
         <div className="mt-4">
           <p>
-            Don&rsquo;t have an account? 
+            Don&rsquo;t have an account?
             <span className="hover:underline">
               <Link to={PAGE_URL.REGISTER}> Sign Up Here</Link>
             </span>
