@@ -3,7 +3,7 @@ export default function Button({children, variant = 'primary',  size = 'xl', onC
     primary: "bg-white text-[#000000] hover:opacity-85",
     primaryOutline: "bg-transparent border border-black text-black hover:bg-black hover:text-white hover:opacity-85",
     secondary: "bg-black text-white hover:opacity-85",
-    secondaryOutline: "bg-transparent border-white text-white hover:bg-black hover:text-white hover:border-white hover:opacity-85",
+    secondaryOutline: "bg-transparent border-white text-black hover:bg-black hover:text-white hover:border-white hover:opacity-85",
     disabled: "hidden",
   };
   
