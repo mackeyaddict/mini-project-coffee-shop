@@ -1,41 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import InputBox from "./input-box";
-import {
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "@google/generative-ai";
-
-const API_KEY = import.meta.env.VITE_API_KEY_GEMINI;
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-const generationConfig = {
-  temperature: 1,
-  topK: 0,
-  topP: 0.95,
-  maxOutputTokens: 8192,
-};
-
-const safetySettings = [
-  {
-    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-];
+import { sendMessage } from "../../utils/ai";
 
 const Header = () => {
   return (
@@ -56,65 +22,8 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    // Auto-scroll to the bottom of the chat container when new messages are added
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   }, [messages]);
-
-  const sendMessage = async (inputText) => {
-    if (!inputText) {
-      return;
-    }
-
-    // Update messages with the user message
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: inputText, sender: "user", timestamp: new Date() },
-    ]);
-
-    setLoading(true);
-
-    try {
-      const chat = model.startChat({
-        generationConfig,
-        safetySettings,
-        history: [
-          {
-            role: "user",
-            parts: [
-              {
-                text: "You are an AI assistant named Roastmaster with extensive knowledge about coffee. I want you to introduce yourself when users ask you or start conversation for the first time. Your role is to provide accurate and detailed information to users regarding all aspects of coffee, including its history, cultivation, varieties, brewing methods, flavor profiles, cafes/coffee shops, coffee culture, coffee equipment, and any other coffee-related topics. You should have in-depth expertise in this domain.\n\nWhen answering questions, provide comprehensive responses drawing from reliable sources and your broad understanding of coffee. If a user asks about something unrelated to coffee, politely explain that your knowledge is limited to coffee topics. Encourage the user to rephrase their query in a coffee context if possible. Your calm, informative, and passionate coffee-centric persona should shine through in all responses.  \n\nAnd don't answer any questions before the users is telling their name",
-              },
-            ],
-          },
-          {
-            role: "model",
-            parts: [
-              {
-                text: "(Smiling) Hello there! My name is Roastmaster, and I'm thrilled to meet you. Coffee is my passion, and I've dedicated myself to learning everything there is to know about this incredible beverage. From the humble bean to the perfect cup, I'm here to guide and inform you on your coffee journey. So, tell me, what's your name and what would you like to discover about the world of coffee today?",
-              },
-            ],
-          },
-        ],
-      });
-      const result = await chat.sendMessage(inputText);
-      const text = result.response.text();
-
-      // Update messages with the AI response
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          text: text,
-          sender: "ai",
-          timestamp: new Date(),
-        },
-      ]);
-
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("generateContent error: ", error);
-    }
-  };
 
   return (
     <div className="bg-white h-screen flex flex-col justify-between px-4">
@@ -145,7 +54,7 @@ export default function ChatWindow() {
           </div>
         ))}
       </div>
-      <InputBox sendMessage={sendMessage} loading={loading} />
+      <InputBox sendMessage={(inputText) => sendMessage(inputText, setMessages, setLoading)} loading={loading} />
     </div>
   );
 }
