@@ -1,6 +1,6 @@
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CommentCard from "../../components/cards/comment-card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const dummyComments = [
   {
@@ -28,18 +28,35 @@ const dummyComments = [
 
 export default function HomeComments() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [commentsToShow, setCommentsToShow] = useState(2);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 640) {
+        setCommentsToShow(1);
+      } else {
+        setCommentsToShow(2);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // initial call to set the correct number of comments
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const nextProducts = () => {
-    setCurrentIndex((currentIndex + 1) % dummyComments.length);
+    setCurrentIndex((currentIndex + commentsToShow) % dummyComments.length);
   };
 
   const prevProducts = () => {
     setCurrentIndex(
-      (currentIndex - 1 + dummyComments.length) % dummyComments.length
+      (currentIndex - commentsToShow + dummyComments.length) % dummyComments.length
     );
   };
 
   const isLeftArrowActive = currentIndex !== 0;
-  const isRightArrowActive = currentIndex !== dummyComments.length - 2;
+  const isRightArrowActive = currentIndex + commentsToShow < dummyComments.length;
+
   return (
     <section className="pb-12 px-4">
       <div className="container mx-auto">
@@ -58,7 +75,7 @@ export default function HomeComments() {
             />
           </div>
           <div className="flex flex-wrap xl:flex-nowrap justify-center gap-8">
-            {dummyComments.slice(currentIndex, currentIndex + 2).map((comment, index) => (
+            {dummyComments.slice(currentIndex, currentIndex + commentsToShow).map((comment, index) => (
               <CommentCard key={index} comment={comment} />
             ))}
           </div>

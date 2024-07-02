@@ -12,16 +12,33 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function HomeProducts() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(3);
   const allProducts = useSelector((state) => state?.product.allProducts);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // initial call to set the correct number of cards
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const nextProducts = () => {
-    setCurrentIndex((currentIndex + 1) % allProducts.length);
+    setCurrentIndex((currentIndex + cardsToShow) % allProducts.length);
   };
 
   const prevProducts = () => {
-    setCurrentIndex((currentIndex - 1 + allProducts.length) % allProducts.length);
+    setCurrentIndex((currentIndex - cardsToShow + allProducts.length) % allProducts.length);
   };
 
   async function getProducts() {
@@ -49,7 +66,7 @@ export default function HomeProducts() {
   console.log(allProducts);
 
   const isLeftArrowActive = currentIndex !== 0;
-  const isRightArrowActive = currentIndex !== allProducts.length - 3; 
+  const isRightArrowActive = currentIndex + cardsToShow < allProducts.length;
 
   return (
     <section className="pb-12 px-4">
@@ -63,7 +80,7 @@ export default function HomeProducts() {
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 place-items-center">
             {allProducts
-              .slice(currentIndex, currentIndex + 3)
+              .slice(currentIndex, currentIndex + cardsToShow)
               .map((product, index) => (
                 <ProductCard key={index} product={product} />
               ))}
