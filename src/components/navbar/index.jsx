@@ -145,7 +145,7 @@ export default function Navbar() {
         <div className="fixed bottom-0 left-0 w-full z-30 px-8 bg-white shadow-lg md:hidden ">
           <div className="container mx-auto py-2 flex justify-between items-center">
             <Link to={PAGE_URL.HOME} className="flex flex-col items-center">
-              <FaHome size={24} />d
+              <FaHome size={24} />
               <span className="text-xs">Home</span>
             </Link>
             <Link to={PAGE_URL.CONTACT} className="flex flex-col items-center">
