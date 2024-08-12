@@ -131,18 +131,22 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <nav className="relative">
-        <div
-          className="fixed top-4 right-4 z-10"
-          onClick={toggleCart}
-        >
-          <div className="relative"> 
+        <div className="fixed top-0 left-0 w-full z-30 px-8 py-4 bg-white shadow-md md:hidden flex justify-between items-center rounded-b-2xl">
+          <div>
+            {isAuthenticated && (
+              <p className="text-sm font-medium">{`Welcome, ${
+                user.fullName || "User"
+              }`}</p>
+            )}
+          </div>
+          <div className="relative cursor-pointer" onClick={toggleCart}>
             <FaShoppingBag size={24} />
             <span className="absolute -top-2 -right-2 text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-white">
               {totalItemsInCart}
             </span>
           </div>
         </div>
-        <div className="fixed bottom-0 left-0 w-full z-30 px-8 bg-white shadow-lg md:hidden ">
+        <div className="fixed bottom-0 left-0 w-full z-30 px-8 bg-white md:hidden rounded-t-2xl">
           <div className="container mx-auto py-2 flex justify-between items-center">
             <Link to={PAGE_URL.HOME} className="flex flex-col items-center">
               <FaHome size={24} />
