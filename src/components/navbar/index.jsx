@@ -67,22 +67,12 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav
-        className="fixed top-0 left-0 w-full z-30 bg-white rounded-b-3xl hidden lg:block"
-      >
+      <nav className="fixed top-0 left-0 w-full z-30 bg-white rounded-b-3xl hidden md:block">
         <div className="container mx-auto my-6 flex items-center justify-center relative">
-          <ul
-            className={`flex ${
-              isOpen ? "flex-col" : "hidden"
-            } lg:flex lg:justify-center items-center bg-transparent lg:bg-white md:rounded-full py-4 px-8 gap-10`}
-          >
+          <ul className="hidden md:flex md:justify-center items-center bg-transparent md:bg-white md:rounded-full py-4 px-8 gap-10">
             {navLists.map((item, index) => (
               <li key={index}>
-                <Link
-                  to={item.path}
-                  className="relative"
-                  onClick={() => setIsOpen(false)}
-                >
+                <Link to={item.path} className="relative">
                   <button className="hover:text-gray-900 focus:outline-none font-semibold">
                     {item.navList}
                     <span className="underline"></span>
@@ -92,30 +82,24 @@ export default function Navbar() {
             ))}
           </ul>
           {isAuthenticated ? (
-            <div
-              className={`lg:block ${
-                isOpen ? "flex top-0 left-0 " : "hidden right-0"
-              } absolute lg:bg-white bg-transparent lg:rounded-full py-4 px-8 mr-6 lg:flex gap-2 lg:top-1 xl:top-0 items-center`}
-            >
+            <div className="absolute flex items-center right-0 px-8 gap-2">
               <p className="hidden xl:block">{`Welcome, ${
                 user.fullName || "User"
               }`}</p>
               <FaSignOutAlt
                 onClick={handleLogout}
-                className="hover:text-gray-900 focsus:outline-none font-semibold relative cursor-pointer"
+                className="hover:text-gray-900 focus:outline-none font-semibold cursor-pointer"
               />
-              <FaShoppingBag className="cursor-pointer" onClick={toggleCart} />
-              <span className="text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center absolute top-2 right-3 text-white">
-                {totalItemsInCart}
-              </span>
+              <div className="relative">  
+                <FaShoppingBag className="cursor-pointer" onClick={toggleCart} />
+                <span className="text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center absolute -top-2 -right-3 text-white">
+                  {totalItemsInCart}
+                </span>
+              </div>
             </div>
           ) : (
-            <div
-              className={`lg:block ${
-                isOpen ? "block top-0 left-0" : "hidden right-0 top-0"
-              } absolute lg:bg-white bg-transparent lg:rounded-full py-4 px-8 mr-6`}
-            >
-              <Link to={PAGE_URL.LOGIN} onClick={() => setIsOpen(false)}>
+            <div className="absolute flex items-center right-0 px-8 gap-2">
+              <Link to={PAGE_URL.LOGIN}>
                 <button className="hover:text-gray-900 focus:outline-none font-semibold relative">
                   Login
                   <span className="underline"></span>
@@ -129,22 +113,24 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <nav className="relative">
-        <div className="fixed top-0 left-0 w-full z-30 px-8 py-4 bg-white shadow-md md:hidden flex justify-between items-center rounded-b-2xl">
-          <div>
-            {isAuthenticated && (
-              <p className="text-sm font-medium">{`Welcome, ${
-                user.fullName || "User"
-              }`}</p>
-            )}
+        {isAuthenticated && (
+          <div className="fixed top-0 left-0 w-full z-30 px-8 py-4 rounded-b-2xl bg-white shadow-md md:hidden flex justify-between items-center">
+            <div>
+              <p className="text-sm font-medium">{`Welcome, ${user.fullName || "User"}`}</p>
+            </div>
+            <div
+              className="relative cursor-pointer"
+              onClick={toggleCart}
+            >
+              <FaShoppingBag size={24} />
+              <span className="absolute -top-2 -right-2 text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-white">
+                {totalItemsInCart}
+              </span>
+            </div>
           </div>
-          <div className="relative cursor-pointer" onClick={toggleCart}>
-            <FaShoppingBag size={24} />
-            <span className="absolute -top-2 -right-2 text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-white">
-              {totalItemsInCart}
-            </span>
-          </div>
-        </div>
-        <div className="fixed bottom-0 left-0 w-full z-30 px-8 bg-white md:hidden rounded-t-2xl">
+        )}
+
+        <div className="fixed bottom-0 left-0 w-full z-30 px-8 bg-white shadow-lg md:hidden">
           <div className="container mx-auto py-2 flex justify-between items-center">
             <Link to={PAGE_URL.HOME} className="flex flex-col items-center">
               <FaHome size={24} />
