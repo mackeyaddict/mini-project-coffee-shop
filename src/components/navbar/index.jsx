@@ -68,9 +68,7 @@ export default function Navbar() {
     <>
       {/* Desktop Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-30 bg-white ${
-          isOpen ? "rounded-b-3xl" : "rounded-none"
-        } hidden lg:block`}
+        className="fixed top-0 left-0 w-full z-30 bg-white rounded-b-3xl hidden lg:block"
       >
         <div className="container mx-auto my-6 flex items-center justify-center relative">
           <ul
