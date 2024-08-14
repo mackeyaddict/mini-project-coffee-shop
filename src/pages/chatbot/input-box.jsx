@@ -22,8 +22,8 @@ export default function InputBox({ sendMessage, loading }) {
       <input
         disabled={loading}
         type="text"
-        className="flex-grow px-4 py-2 bg-black text-white placeholder-white rounded-lg focus:outline-none"
-        placeholder="Type a message..."
+        className="w-full px-4 py-2 bg-black text-white placeholder-white rounded-lg focus:outline-none"
+        placeholder="Ask me something..."
         value={loading ? "Loading..." : input}
         onChange={(e) => setInput(e.target.value)}
       />
