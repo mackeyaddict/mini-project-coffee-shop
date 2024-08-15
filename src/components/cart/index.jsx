@@ -3,6 +3,7 @@ import {
   removeFromCart,
   clearCart,
   setOpen,
+  setSelectedService,
 } from "../../store/slices/cart.slice";
 import { formatPrice } from "../../utils/format-price";
 import {
@@ -56,6 +57,7 @@ export default function Cart() {
 
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart(productId));
+    dispatch(setSelectedService(null))
   };
 
   const handleClearCart = () => {
