@@ -30,8 +30,8 @@ export default function DetailOfProduct({ product }) {
     setCount(1);
   };
 
-  const handleServiceSelection = (service) => {
-    dispatch(setSelectedService(service));
+  const handleServiceSelection = (event) => {
+    dispatch(setSelectedService(event.target.value));
   };
 
   return (
@@ -59,18 +59,32 @@ export default function DetailOfProduct({ product }) {
       <div className="flex flex-col gap-2">
         <p className="font-medium text-2xl">Service</p>
         <div className="flex gap-2">
-          <button
-            className="px-4 py-1 bg-[#D9D9D9] text-black font-medium text-xl rounded-lg hover:scale-95 focus:bg-black focus:text-white"
-            onClick={() => handleServiceSelection("Drive Thru")}
-          >
-            Drive Thru
-          </button>
-          <button
-            className="px-4 py-1 bg-[#D9D9D9] text-black font-medium text-xl rounded-lg hover:scale-95 focus:bg-black focus:text-white"
-            onClick={() => handleServiceSelection("In Place")}
-          >
-            In Place
-          </button>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="service"
+              value="Drive Thru"
+              checked={selectedService === "Drive Thru"}
+              onChange={handleServiceSelection}
+              className="hidden peer"
+            />
+            <span className="px-4 py-1 bg-[#D9D9D9] text-black font-medium text-xl rounded-lg cursor-pointer peer-checked:bg-black peer-checked:text-white hover:scale-95">
+              Drive Thru
+            </span>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="service"
+              value="In Place"
+              checked={selectedService === "In Place"}
+              onChange={handleServiceSelection}
+              className="hidden peer"
+            />
+            <span className="px-4 py-1 bg-[#D9D9D9] text-black font-medium text-xl rounded-lg cursor-pointer peer-checked:bg-black peer-checked:text-white hover:scale-95">
+              In Place
+            </span>
+          </label>
         </div>
       </div>
       <div className="pt-2 flex gap-4">
