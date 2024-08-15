@@ -6,7 +6,9 @@ export default function OrderDetails() {
 
   return (
     <div className="mt-4">
-      <h2 className="text-xl font-semibold mb-4">Your Order Details</h2>
+      {orders.length > 0 && (
+        <h2 className="text-xl font-semibold mb-4">Your Order Details</h2>
+      )}
       {orders.map((order) => (
         <div key={order.id} className="border border-gray-300 rounded-md p-4 mb-6">
           <h3 className="text-lg font-semibold mb-2">Order ID: {order.id}</h3>
