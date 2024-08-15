@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import InputBox from "./input-box";
 import { sendMessage } from "../../utils/ai";
+import ReactMarkdown from "react-markdown";
 
 const Header = () => {
   return (
@@ -15,6 +16,12 @@ const Header = () => {
     </div>
   );
 };
+
+const TypingIndicator = ({ isLoading }) => (
+  <div className="text-center my-2">
+    {isLoading ? <span className="text-gray-500 italic">AI is typing...</span> : null}
+  </div>
+);
 
 export default function ChatWindow() {
   const chatContainerRef = useRef(null);
@@ -41,18 +48,21 @@ export default function ChatWindow() {
                 : "self-start bg-black text-white"
             } p-3 mb-4 rounded-lg`}
           >
-            <p className="message-text">{message.text}</p>
+            <ReactMarkdown className="message-text">
+              {message.text}
+            </ReactMarkdown>
             <span
               className={`time ${
                 message.sender === "user" ? "text-black" : "text-white"
               } text-xs`}
             >
               {message.timestamp
-                ? dayjs(message.timestamp).format("DD MMMM YYYY")
+                ? dayjs(message.timestamp).format("DD MMMM YYYY, HH:mm")
                 : ""}
             </span>
           </div>
         ))}
+        <TypingIndicator isLoading={loading} />
       </div>
       <InputBox sendMessage={(inputText) => sendMessage(inputText, setMessages, setLoading)} loading={loading} />
     </div>
