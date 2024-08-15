@@ -30,3 +30,22 @@ input[type="radio"]:checked + label{
 .input {
   @apply border-b-2 w-full py-2 border-slate-500 focus:outline-none bg-transparent
 }
+
+/* @Scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
