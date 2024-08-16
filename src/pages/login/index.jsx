@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/slices/auth.slice";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -16,8 +17,9 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +62,9 @@ export default function Login() {
     }
   };
 
-  console.log(`isAuth: ${isAuthenticated}`);
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <section className="flex justify-center items-center h-screen">
@@ -78,9 +82,9 @@ export default function Login() {
               className="input"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Password"
@@ -88,6 +92,13 @@ export default function Login() {
               onChange={handleInputChange}
               className="input"
             />
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-600"
+            >
+              {showPassword ? <FaEyeSlash size={24}/> : <FaEye size={24}/>}
+            </button>
           </div>
           <Button
             size="md"

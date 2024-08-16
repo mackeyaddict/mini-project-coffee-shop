@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import Button from "../../components/button";
-import { PAGE_URL } from "../../utils/constant";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
 import { auth, db } from "../../../firebase";
+import Button from "../../components/button";
+import { PAGE_URL } from "../../utils/constant";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ export default function Register() {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State for showing/hiding password
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for showing/hiding confirm password
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -77,6 +80,14 @@ export default function Register() {
     });
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
+  };
+
   return (
     <section className="flex justify-center items-center h-screen bg-white">
       <div className="p-8 w-full max-w-md">
@@ -104,9 +115,9 @@ export default function Register() {
               className="input"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"} // Toggle between text and password type
               id="password"
               name="password"
               placeholder="Password"
@@ -114,10 +125,16 @@ export default function Register() {
               onChange={handleChange}
               className="input"
             />
+            <span
+              onClick={toggleShowPassword}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash size={24} /> : <FaEye size={24}/>}
+            </span>
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"} // Toggle between text and password type
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
@@ -125,6 +142,12 @@ export default function Register() {
               onChange={handleChange}
               className="input"
             />
+            <span
+              onClick={toggleShowConfirmPassword}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            >
+              {showConfirmPassword ? <FaEyeSlash size={24} /> : <FaEye size={24} />}
+            </span>
           </div>
           <Button
             type="submit"
