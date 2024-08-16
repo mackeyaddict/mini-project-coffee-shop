@@ -29,7 +29,7 @@ export default function HomeProducts() {
     }
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // initial call to set the correct number of cards
+    handleResize(); 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -51,7 +51,6 @@ export default function HomeProducts() {
         if (!x.exists()) return;
         product.push({id: x.id, ...x.data()});
       }
-      console.log(`Product with ID: ${product}`)
       dispatch(setAllProducts(product));
     } catch (error) {
       console.log(error);
