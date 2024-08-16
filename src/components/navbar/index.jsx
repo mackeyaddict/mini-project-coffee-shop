@@ -86,15 +86,23 @@ export default function Navbar() {
               <p className="hidden xl:block">{`Welcome, ${
                 user.fullName || "User"
               }`}</p>
-              <FaSignOutAlt
-                onClick={handleLogout}
-                className="hover:text-gray-900 focus:outline-none font-semibold cursor-pointer"
-              />
-              <div className="relative">  
+              <div className="relative group">
+                <FaSignOutAlt
+                  onClick={handleLogout}
+                  className="hover:text-gray-900 focus:outline-none font-semibold cursor-pointer"
+                />
+                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-max bg-black text-white text-xs font-medium py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                  Logout
+                </div>
+              </div>
+              <div className="relative group">
                 <FaShoppingBag className="cursor-pointer" onClick={toggleCart} />
                 <span className="text-xs bg-red-500 rounded-full w-5 h-5 flex items-center justify-center absolute -top-2 -right-3 text-white">
                   {totalItemsInCart}
                 </span>
+                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-max bg-black text-white text-xs font-medium py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                  Cart
+                </div>
               </div>
             </div>
           ) : (
