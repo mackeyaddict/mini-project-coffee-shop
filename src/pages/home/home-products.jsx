@@ -69,7 +69,7 @@ export default function HomeProducts() {
     <section className="pb-12 px-4">
       <div className="container mx-auto flex flex-col gap-5">
         <h3 className="text-4xl font-semibold pb-5">Our Products</h3>
-        <div className="flex items-center mx-auto gap-16">
+        <div className="flex items-center mx-auto gap-6 md:gap-16">
           <FaArrowLeft
             size={24}
             onClick={prevProducts}

@@ -64,7 +64,7 @@ export default function HomeComments() {
           See what <br /> 
           <span className="text-[#EC8B1E]">others are saying</span>
         </h1>
-        <div className="flex justify-center gap-8">
+        <div className="flex justify-center gap-6 md:gap-8">
           <div className="flex place-content-end items-center">
             <FaArrowLeft
               size={24}
