@@ -63,8 +63,6 @@ export default function HomeProducts() {
     getProducts();
   }, []);
 
-  console.log(allProducts);
-
   const isLeftArrowActive = currentIndex !== 0;
   const isRightArrowActive = currentIndex + cardsToShow < allProducts.length;
 
